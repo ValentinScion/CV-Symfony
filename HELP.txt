@@ -1,0 +1,20 @@
+Nom des tables...
+
+    Expériences
+    Compétences 
+    Loisirs
+    Formations
+    
+Nom des classes...
+
+    Expériences = experience
+    Compétences = skill
+    Loisirs = interest
+    Formations = education
+    
+Nom des repository...
+
+    Expériences = Experience
+    Compétences = Skill
+    Loisirs = Interest
+    Formations = Education

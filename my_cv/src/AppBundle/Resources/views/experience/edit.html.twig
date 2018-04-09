@@ -1,0 +1,7 @@
+<html>
+    <body>
+        <h3>Modification d'une expérience</h3>
+        {{ form_start(form, {'action': path('validate_edit_experience', {'id' : entity.getId()}) }) }}
+        {{ form(form) }}
+    </body>
+</html>

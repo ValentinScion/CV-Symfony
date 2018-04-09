@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+    <head>
+            <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+            <meta name="description" content="">
+            <meta name="author" content="">
+        <title>{% block title %}My Wonderfull CV{% endblock %}</title>
+        {% block stylesheets %}{% endblock %}
+        
+            <link href="{{ asset('template/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+            <link href="https://fonts.googleapis.com/css?family=Saira+Extra+Condensed:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+            <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i" rel="stylesheet">
+            <link href="{{ asset('template/vendor/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet">
+            <link href="{{ asset('template/vendor/devicons/css/devicons.min.css') }}" rel="stylesheet">
+            <link href="{{ asset('template/vendor/simple-line-icons/css/simple-line-icons.css') }}" rel="stylesheet">
+            <link href="{{ asset('node_modules/noty/lib/noty.css') }}" rel="stylesheet">
+            <link href="{{ asset('node_modules/noty/lib/themes/relax.css') }}" rel="stylesheet">
+            <link href="{{ asset('template/css/resume.min.css') }}" rel="stylesheet">
+            <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+    </head>
+    
+    <body>
+          
+{% block body %}
+  
+  <body id="page-top">
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top" id="sideNav">
+      <a class="navbar-brand js-scroll-trigger" href="#page-top">
+        <span class="d-block d-lg-none">Start Bootstrap</span>
+        <span class="d-none d-lg-block">
+          <img class="img-fluid img-profile rounded-circle mx-auto mb-2" src="{{ asset('https://res.cloudinary.com/teepublic/image/private/s--G-sEUdGD--/t_Preview/b_rgb:ffffff,c_limit,f_jpg,h_630,q_90,w_630/v1446161353/production/designs/71233_0.jpg') }}" alt="">
+        </span>
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="#about">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="#experience">Experience</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="#education">Education</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="#skills">Skills</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="#interests">Interests</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="container-fluid p-0">
+
+      <section class="resume-section p-3 p-lg-5 d-flex d-column" id="about">
+        <div class="my-auto">
+          <h1 class="mb-0">{{name}}
+            <span class="text-primary">{{firstname}}</span>
+          </h1>
+          <div class="subheading mb-5">3542 Berry Street · Cheyenne Wells, CO 80810 · (317) 585-8468 ·
+            <a href="mailto:name@email.com">name@email.com</a>
+          </div>
+          <p class="mb-5">I am experienced in leveraging agile frameworks to provide a robust synopsis for high level overviews. Iterative approaches to corporate strategy foster collaborative thinking to further the overall value proposition.</p>
+          <ul class="list-inline list-social-icons mb-0">
+            <li class="list-inline-item">
+              <a href="#">
+                <span class="fa-stack fa-lg">
+                  <i class="fa fa-circle fa-stack-2x"></i>
+                  <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                </span>
+              </a>
+            </li>
+            <li class="list-inline-item">
+              <a href="#">
+                <span class="fa-stack fa-lg">
+                  <i class="fa fa-circle fa-stack-2x"></i>
+                  <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                </span>
+              </a>
+            </li>
+            <li class="list-inline-item">
+              <a href="#">
+                <span class="fa-stack fa-lg">
+                  <i class="fa fa-circle fa-stack-2x"></i>
+                  <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                </span>
+              </a>
+            </li>
+            <li class="list-inline-item">
+              <a href="#">
+                <span class="fa-stack fa-lg">
+                  <i class="fa fa-circle fa-stack-2x"></i>
+                  <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                </span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="resume-section p-3 p-lg-5 d-flex flex-column" id="experience">
+        <div class="my-auto">
+          {% if is_granted('ROLE_ADMIN') %}
+            <a href="{{ path('create_experience') }}">Ajouter une expérience</a>
+          {% endif %}
+          <h2 class="mb-5">Experience</h2>
+
+          {% for Experience in Experiences %}
+            <div class="resume-item d-flex flex-column flex-md-row mb-5">
+              <div class="resume-content mr-auto">
+                {% if is_granted('ROLE_ADMIN') %}
+                  <a target="blank" href="{{ path('edit_experience', {'id': Experience.getId()}) }}">Modifier</a>
+                  <span> / </span>
+                  <a href="{{ path('delete_experience', {'id': Experience.getId()}) }}">Supprimer</a>
+                {% endif %}
+                <h3 class="mb-0">{{Experience.getName()}}</h3>
+                <p>Bring to the table win-win survival strategies to ensure proactive domination. At the end of the day, going forward, a new normal that has evolved from generation X is on the runway heading towards a streamlined cloud solution. User generated content in real-time will have multiple touchpoints for offshoring.</p>
+              </div>
+              <div class="resume-date text-md-right">
+                <span class="text-primary">{{Experience.getDateDebut()}} - {{Experience.getDateFin()}}</span>
+              </div>
+            </div>
+          {% endfor %}
+
+        </div>
+
+      </section>
+
+      <section class="resume-section p-3 p-lg-5 d-flex flex-column" id="education">
+        <div class="my-auto">
+          {% if is_granted('ROLE_ADMIN') %}  
+            <a href="{{ path('create_education') }}">Ajouter une formation</a>
+          {% endif %}
+          <h2 class="mb-5">Education</h2>
+
+          {% for Education in Educations %}
+            <div class="resume-item d-flex flex-column flex-md-row mb-5">
+              <div class="resume-content mr-auto">
+                {% if is_granted('ROLE_ADMIN') %}
+                  <a target="blank" href="{{ path('edit_education', {'id': Education.getId()}) }}">Modifier</a>
+                  <span> / </span>
+                  <a href="{{ path('delete_education', {'id': Education.getId()}) }}">Supprimer</a>
+                {% endif %}
+                <h3 class="mb-0">{{Education.getName()}}</h3>
+                <div class="subheading mb-3">Bachelor of Science</div>
+                <div>Computer Science - Web Development Track</div>
+                <p>GPA: 3.23</p>
+              </div>
+              <div class="resume-date text-md-right">
+                <span class="text-primary">{{Education.getDateDebut()}} - {{Education.getDateFin()}}</span>
+              </div>
+            </div>
+          {% endfor %}
+          
+        </div>
+      </section>
+
+      <section class="resume-section p-3 p-lg-5 d-flex flex-column" id="skills">
+        <div class="my-auto">
+          {% if is_granted('ROLE_ADMIN') %}
+          <a href="{{ path('create_skill') }}">Ajouter une compétence</a>
+          {% endif %}
+          <h2 class="mb-5">Skills</h2>
+
+          {% for Skill in Skills %}
+            {% if is_granted('ROLE_ADMIN') %}
+            <a target="blank" href="{{ path('edit_skill', {'id': Skill.getId()}) }}">Modifier</a>
+            <span> / </span>
+            <a href="{{ path('delete_skill', {'id': Skill.getId()}) }}">Supprimer</a>
+            {% endif %}
+            <div class="subheading mb-3">{{Skill.getName}}</div>
+          {% endfor %}
+          
+        </div>
+      </section>
+
+      <section class="resume-section p-3 p-lg-5 d-flex flex-column" id="interests">
+        <div class="my-auto">
+          {% if is_granted('ROLE_ADMIN') %}
+          <a href="{{ path('create_interest') }}">Ajouter un loisir</a>
+          {% endif %}
+          <h2 class="mb-5">Interests</h2>
+            
+            {% for Interest in Interests %}
+              {% if is_granted('ROLE_ADMIN') %}
+              <a target="blank" href="{{ path('edit_interest', {'id': Interest.getId()}) }}">Modifier</a>
+              <span> / </span>
+              <a href="{{ path('delete_interest', {'id': Interest.getId()}) }}">Supprimer</a>
+              {% endif %}
+              <div class="subheading mb-3">{{Interest.getName}}</div>
+            {% endfor %}
+            
+        </div>
+      </section>
+
+    </div>
+    {% block javascripts %}
+          
+            <script src="{{ asset('template/vendor/jquery/jquery.min.js') }}"></script>
+            <script src="{{ asset('template/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+            <script src="{{ asset('template/vendor/jquery-easing/jquery.easing.min.js') }}"></script>
+            <script src="{{ asset('node_modules/noty/lib/noty.min.js') }}"></script>
+            <script src="{{ asset('template/js/resume.min.js') }}"></script>
+            
+            <script type="text/javascript">
+              $(document).ready(function() {
+                new Noty({
+                    text: 'IT WORKS BABY!',
+                    layout: 'top',
+                    theme: 'relax',
+                    type: 'success'
+                }).show();
+              });
+          </script>
+        
+        {% endblock %}
+
+{% endblock body %}
